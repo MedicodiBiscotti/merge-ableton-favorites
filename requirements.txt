@@ -1,0 +1,2 @@
+python-xmp-toolkit==2.0.2
+pytz==2024.1

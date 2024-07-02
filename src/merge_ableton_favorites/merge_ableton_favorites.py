@@ -10,6 +10,7 @@ def get_paths(paths: list[str], recursive: bool) -> defaultdict[str, list[Path]]
     :param paths: List of paths to get the files from.
     :param recursive: Whether to get the files recursively or not.
     :return: A dictionary containing the file names as keys and list of paths as values.
+    :raises FileNotFoundError: If no XMP files are found in the given paths.
     """
     files = defaultdict(list)
     pattern = "*.xmp"
@@ -25,4 +26,7 @@ def get_paths(paths: list[str], recursive: bool) -> defaultdict[str, list[Path]]
 
         elif path.is_file() and path.match(pattern):
             files[path.name].append(path)
+
+    if not files:
+        raise FileNotFoundError("No XMP files found in the given paths.")
     return files

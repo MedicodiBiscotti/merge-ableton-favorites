@@ -1,5 +1,6 @@
 import os
 
+import pytest
 from pyfakefs.fake_filesystem import FakeFilesystem
 from merge_ableton_favorites.merge_ableton_favorites import get_paths
 
@@ -91,3 +92,9 @@ def test_search_folder_and_single_file(fs: FakeFilesystem):
     assert len(pathdict) == 2
     assert len(pathdict[file_name1]) == 1
     assert len(pathdict[file_name2]) == 1
+
+
+def test_given_no_paths_found_then_raise_error():
+    # Act & Assert
+    with pytest.raises(FileNotFoundError):
+        get_paths(["."], False)

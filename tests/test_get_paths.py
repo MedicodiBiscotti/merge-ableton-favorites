@@ -98,3 +98,13 @@ def test_given_no_paths_found_then_raise_error():
     # Act & Assert
     with pytest.raises(FileNotFoundError):
         get_paths(["."], False)
+
+
+def test_given_nested_file_without_recursive_then_raise_error(fs: FakeFilesystem):
+    # Arrange
+    file_name = "b17d447d-894d-5b3e-96e9-a81dbf4d431c.xmp"
+    fs.create_file(f"a/{file_name}")
+
+    # Act & Assert
+    with pytest.raises(FileNotFoundError):
+        get_paths(["."], False)

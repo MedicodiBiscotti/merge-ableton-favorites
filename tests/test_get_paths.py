@@ -78,6 +78,19 @@ def test_both_same_and_different_files_in_different_folders(fs: FakeFilesystem):
     assert len(pathdict[file_name2]) == 1
 
 
+def test_single_file(fs: FakeFilesystem):
+    # Arrange
+    file_name = "b17d447d-894d-5b3e-96e9-a81dbf4d431c.xmp"
+    fs.create_file(file_name)
+
+    # Act
+    pathdict = get_paths([file_name], False)
+
+    # Assert
+    assert len(pathdict) == 1
+    assert len(pathdict[file_name]) == 1
+
+
 def test_search_folder_and_single_file(fs: FakeFilesystem):
     # Arrange
     file_name1 = "b17d447d-894d-5b3e-96e9-a81dbf4d431c.xmp"
@@ -108,3 +121,33 @@ def test_given_nested_file_without_recursive_then_raise_error(fs: FakeFilesystem
     # Act & Assert
     with pytest.raises(FileNotFoundError):
         get_paths(["."], False)
+
+
+def test_given_nonexistent_file_then_raise_error(fs: FakeFilesystem):
+    # Arrange
+    file_name = "not-there.txt"
+
+    # Act & Assert
+    with pytest.raises(FileNotFoundError):
+        get_paths([file_name], False)
+
+
+def test_given_some_files_and_nonexistent_file_then_raise_error(fs: FakeFilesystem):
+    # Arrange
+    file_name1 = "b17d447d-894d-5b3e-96e9-a81dbf4d431c.xmp"
+    file_name2 = "not-there.txt"
+    fs.create_file(file_name1)
+
+    # Act & Assert
+    with pytest.raises(FileNotFoundError):
+        get_paths([file_name1, file_name2], False)
+
+
+def test_given_wrong_filename_format_then_raise_error(fs: FakeFilesystem):
+    # Arrange
+    file_name = "wrong-name.txt"
+    fs.create_file(file_name)
+
+    # Act & Assert
+    with pytest.raises(ValueError):
+        get_paths([file_name], False)

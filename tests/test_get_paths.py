@@ -4,7 +4,7 @@ import pytest
 from pyfakefs.fake_filesystem import FakeFilesystem
 from merge_ableton_favorites.merge_ableton_favorites import get_paths
 
-# Imported for intellisense.
+# Imported for IntelliSense.
 # pyfakefs doesn't work with C-based XML parsers like lxml.
 
 

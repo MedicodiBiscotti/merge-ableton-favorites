@@ -1,6 +1,8 @@
-import argparse
+import sys
 from collections import defaultdict
 from pathlib import Path
+
+import cli
 
 
 def get_paths(paths: list[str], recursive: bool) -> defaultdict[str, list[Path]]:
@@ -44,36 +46,11 @@ def get_paths(paths: list[str], recursive: bool) -> defaultdict[str, list[Path]]
     return files
 
 
-if __name__ == "__main__":
-    # Situations where arguments don't really make sense:
-    # - Only one source and not recursive.
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "paths",
-        nargs="*",
-        type=Path,
-        default=[Path(".")],
-        help="Paths to search for XMP files. Can be folders or files.",
-    )
-    parser.add_argument(
-        "-o",
-        "--output",
-        type=Path,
-        default=".",
-        help="Output folder to write to.",
-    )
-    parser.add_argument(
-        "-r",
-        "--recursive",
-        action="store_true",
-        help="Search recursively in the given paths.",
-    )
-    parser.add_argument(
-        "-f",
-        "--force",
-        action="store_true",
-        help="Overwrite the output files if they already exist.",
-    )
-    args = parser.parse_args()
+def main(args=None):
+    args = cli.parse_args(args)
     print(args)
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
     pass

@@ -151,3 +151,19 @@ def test_given_wrong_filename_format_then_raise_error(fs: FakeFilesystem):
     # Act & Assert
     with pytest.raises(ValueError):
         get_paths([file_name], False)
+
+
+def test_given_recursive_and_exclude_root_option_then_exclude_root(fs: FakeFilesystem):
+    # Arrange
+    file_name1 = "b17d447d-894d-5b3e-96e9-a81dbf4d431c.xmp"
+    file_name2 = "57379c33-1601-52b3-9881-2f9dddeb963b.xmp"
+    fs.create_file(f"a/{file_name1}")
+    fs.create_file(file_name2)
+
+    # Act
+    pathdict = get_paths(["."], True, True)
+
+    # Assert
+    assert len(pathdict) == 1
+    assert len(pathdict[file_name1]) == 1
+    assert file_name2 not in pathdict

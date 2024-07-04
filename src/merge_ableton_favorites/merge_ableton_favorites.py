@@ -1,4 +1,3 @@
-import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -60,8 +59,3 @@ def main(args=None):
     # If no-prompt, then fail on warnings that would cause a prompt.
     args = cli.parse_args(args)
     print(args)
-
-
-if __name__ == "__main__":
-    main(sys.argv[1:])
-    pass

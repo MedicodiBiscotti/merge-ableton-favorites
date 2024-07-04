@@ -30,7 +30,7 @@ def parse_args(args):
         "-f",
         "--force",
         action="store_true",
-        help="Overwrite the output files if they already exist.",
+        help="Ignore warnings, e.g. overwrite output files if they already exist.",
     )
     parser.add_argument(
         "-n",

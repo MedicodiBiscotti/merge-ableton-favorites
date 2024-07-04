@@ -11,14 +11,14 @@ def parse_args(args):
         nargs="*",
         type=Path,
         default=[Path(".")],
-        help="Paths to search for XMP files. Can be folders or files.",
+        help="Paths to search for XMP files. Can be folders or files. (default: '.')",
     )
     parser.add_argument(
         "-o",
         "--output",
         type=Path,
         default=".",
-        help="Output folder to write to.",
+        help="Output folder to write to. (default: '.')",
     )
     parser.add_argument(
         "-r",
@@ -45,7 +45,7 @@ def parse_args(args):
         "--prompt",
         action="store_true",
         dest="prompt",
-        help="Prompt to continue after warning without --force.",
+        help="Prompt to continue after warning without --force. (default)",
     )
     prompt_group.add_argument(
         "--no-prompt",
@@ -59,7 +59,7 @@ def parse_args(args):
         "--include-root",
         action="store_false",
         dest="exclude_root",
-        help="Include files in the root folder when recursive.",
+        help="Include files in the root folder when recursive. (default)",
     )
     exclude_group.add_argument(
         "--exclude-root",

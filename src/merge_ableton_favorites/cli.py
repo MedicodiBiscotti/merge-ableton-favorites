@@ -32,6 +32,13 @@ def parse_args(args):
         action="store_true",
         help="Overwrite the output files if they already exist.",
     )
+    parser.add_argument(
+        "-n",
+        "--dry-run",
+        "--noop",
+        action="store_true",
+        help="Do not write any files, just show what would be done.",
+    )
 
     prompt_group = parser.add_mutually_exclusive_group()
     prompt_group.add_argument(

@@ -32,4 +32,20 @@ def parse_args(args):
         action="store_true",
         help="Overwrite the output files if they already exist.",
     )
+
+    prompt_group = parser.add_mutually_exclusive_group()
+    prompt_group.add_argument(
+        "--prompt",
+        action="store_true",
+        dest="prompt",
+        help="Prompt to continue after warning without --force.",
+    )
+    prompt_group.add_argument(
+        "--no-prompt",
+        action="store_false",
+        dest="prompt",
+        help="Fail after warning without --force.",
+    )
+
+    parser.set_defaults(prompt=True)
     return parser.parse_args(args)

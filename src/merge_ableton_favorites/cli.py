@@ -47,5 +47,19 @@ def parse_args(args):
         help="Fail after warning without --force.",
     )
 
-    parser.set_defaults(prompt=True)
+    exclude_group = parser.add_mutually_exclusive_group()
+    exclude_group.add_argument(
+        "--include-root",
+        action="store_false",
+        dest="exclude_root",
+        help="Include files in the root folder when recursive.",
+    )
+    exclude_group.add_argument(
+        "--exclude-root",
+        action="store_true",
+        dest="exclude_root",
+        help="Exclude files in the root folder when recursive.",
+    )
+
+    parser.set_defaults(prompt=True, exclude_root=False)
     return parser.parse_args(args)
